@@ -20,6 +20,8 @@ service: enricher # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: dev
+  profile: personal-root-access
 
 # you can overwrite defaults here
 #  stage: dev
@@ -55,8 +57,15 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  numberToPercent:
+    handler: handler.numberToPercent
+    events:
+      - http:
+          path: numberToPercent
+          method: post
+          
+plugins:
+  - serverless-offline
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

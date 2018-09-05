@@ -1,14 +1,16 @@
 'use strict';
 
-module.exports.hello = async (event, context) => {
+const numberToPercentConverter = (number, decimals=2) => {
+    return (number * 100).toFixed(decimals);
+}
+
+module.exports.numberToPercent = async (event, context) => {
+  const body = JSON.parse(event.body)
+
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
+      percent: numberToPercentConverter(body.number, body.decimals),
     }),
-  };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
-};
+  }
+}
