@@ -1,7 +1,9 @@
 'use strict';
 
-const numberToPercentConverter = (number, decimals=2) => {
-    return (number * 100).toFixed(decimals);
+const funFacts = require('./fixtures/FunFacts.json');
+
+const numberToPercentConverter = (number, decimals=2, suffix='%') => {
+    return `${(number * 100).toFixed(decimals)}${suffix}`
 }
 
 module.exports.numberToPercent = async (event, context) => {
@@ -10,7 +12,18 @@ module.exports.numberToPercent = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      percent: numberToPercentConverter(body.number, body.decimals),
+      percent: numberToPercentConverter(body.number, body.decimals, body.suffix),
+    }),
+  }
+}
+
+module.exports.funFacts = async (event, context) => {
+  const query = event.queryStringParameters
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: funFacts[query.id]
     }),
   }
 }

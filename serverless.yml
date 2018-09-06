@@ -63,7 +63,13 @@ functions:
       - http:
           path: numberToPercent
           method: post
-          
+  funFacts:
+    handler: handler.funFacts
+    events:
+      - http:
+          path: funFacts
+          method: get
+
 plugins:
   - serverless-offline
 
