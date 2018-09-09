@@ -68,7 +68,7 @@ functions:
     events:
       - http:
           path: funFacts
-          method: get
+          method: post
 
 plugins:
   - serverless-offline

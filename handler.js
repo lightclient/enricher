@@ -18,12 +18,12 @@ module.exports.numberToPercent = async (event, context) => {
 }
 
 module.exports.funFacts = async (event, context) => {
-  const query = event.queryStringParameters
+  const body = JSON.parse(event.body)
 
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: funFacts[query.id]
+      message: funFacts[body.id]
     }),
   }
 }
